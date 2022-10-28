@@ -1,0 +1,35 @@
+#include <stdio.h>
+int main()
+{
+	int n,i;
+	printf("enter the no of processes: ");
+	scanf("%d",&n);
+	int p[n],bt[n],tat[n],wt[n];
+	float tottat=0,totwt=0;
+	printf("enter the burst time of each process : ");
+	for(i=0;i<n;i++)
+	{
+		scanf("%d",&bt[i]);
+		p[i]=i;
+		if(i==0)
+		{
+			tat[i]=bt[i];
+		}
+		else
+		{
+			tat[i]=tat[i-1]+bt[i];
+			wt[i]=tat[i]-bt[i];
+		}
+		tottat=tottat+tat[i];
+		totwt=totwt+wt[i];
+	}
+	printf("process\tbt\ttat\twt\n");
+	for(i=0;i<n;i++)
+	{
+		printf("%d\t%d\t%d\t%d\n",p[i],bt[i],tat[i],wt[i]);
+	}
+	printf("total turn around time = %f\n",tottat);
+	printf("average turn around time = %f\n",tottat/n);
+	printf("total waiting time = %f\n",totwt);
+	printf("average waiting time = %f\n",totwt/n);
+}
